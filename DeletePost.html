@@ -1,0 +1,36 @@
+<html>
+  <head>
+      <title>Delte Post</title>
+  </head>
+  <body>
+    <form  method="post" action="DeletePost.php">
+      <select name="user">
+        <?php
+
+          $mysqli = new mysqli("mysql.eecs.ku.edu","apurva","Qwerty1234!","apurva");
+
+          $output = "SELECT * FROM Posts";
+
+          if($input = $mysqli->query($output))
+          {
+
+            while($r = $input->fetch_assoc())
+            {
+
+              $postID = $r['post_id'];
+              $content = $r['content'];
+              $authorID = $r['author_id'];
+              echo '<tr><td><input type="checkbox" name="delete[]" value="' . $postID . '"></td><td>' . $content . '</td><td>' . $authorID . '</td></tr>';
+
+            }
+
+            $input->free();
+
+          }
+
+        ?>
+        </select>
+  <input type="submit" value="Delete Post" onclick="confirm">
+  </form>
+  </body>
+</html>
